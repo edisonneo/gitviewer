@@ -1,6 +1,6 @@
-# gitviewer
+# GitViewer
 
-> Application for viewing readme files
+> Application for viewing the Readme files of Github repositories
 
 ## Build Setup
 
@@ -15,8 +15,5 @@ $ npm run dev
 $ npm run build
 $ npm start
 
-# generate static project
-$ npm run generate
-```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
