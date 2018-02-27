@@ -1,6 +1,6 @@
 <template lang='pug'>
 	section
-		h1 Enter a github username 
+		h1 Enter a Github username 
 		input(v-on:keyup.enter="submit" type="text" placeholder="githubusername")
 
 </template>

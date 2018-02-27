@@ -17,7 +17,6 @@ export default {
   components: {
     AppProjectList,
     AppNavBar
-    // AppSearchUser
   }
 }
 </script>

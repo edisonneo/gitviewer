@@ -13,7 +13,7 @@ import { mapState } from 'vuex';
 import showdown from 'showdown';
 
 export default {
-	name: 'project-list',
+	name: 'project-readme',
 	
 	data() {
 		return {
@@ -30,18 +30,20 @@ export default {
 	},
 	mounted () {
 		var vm = this;
-		this.$spinner = document.getElementById('spinner');
 		this.converter = new showdown.Converter();
+		this.$spinner = document.getElementById('spinner');
 		this.$content = document.getElementById('content');					
 		this.$errorMsg = document.getElementById('error-msg');
 		
 		this.$spinner.style.display = 'block';
 		
+		// Retrieve the readme file using the most common file name (README.md)
 		axios.get("https://api.github.com/repos/"+ this.username +"/"+ this.project.name +"/contents/README.md")
 				.then(response => {
-					this.renderReadme(response.data.content)
+					 this.renderReadme(response.data.content)
 				})
 				.catch(error => {
+					// If an error is returned try retrieving another type of file name (readme.markdown)
 					axios.get("https://api.github.com/repos/"+ this.username +"/"+ this.project.name +"/contents/readme.markdown")
 						.then(response => {
 							this.renderReadme(response.data.content)
@@ -56,6 +58,7 @@ export default {
 	methods: {
 		
 		renderReadme(content){
+			// Decode the base64 encoded content
 			var markdown = atob(content)	
 			this.$spinner.style.display = 'none';
 			this.$content.innerHTML = this.converter.makeHtml(markdown);

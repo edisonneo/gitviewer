@@ -1,5 +1,5 @@
 <template lang='pug'>
-	.navbar
+	#navbar
 		a(@click="goBack") Back
 		h2 {{ $store.state.pageTitle }}
 
@@ -38,7 +38,7 @@ export default {
 
 <style lang='sass'>
 	
-	.navbar
+	#navbar
 		position: fixed
 		background: #fff
 		top: 0

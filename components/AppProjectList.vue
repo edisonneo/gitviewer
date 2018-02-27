@@ -36,25 +36,29 @@ export default {
 
 		this.$spinner.style.display = 'block';
 		
+		// In the case of the user entering the project list url directly
 		if(!this.username){
 			var username = this.$route.path.replace('/', '')
 			this.$store.commit('setUsername', username)
+			
 		}
 
 		this.$store.commit('setPageTitle', this.username + "'s projects");
+
+		// Retrieve repos belonging to the user
 		axios.get("https://api.github.com/users"+ this.$route.path +"/repos")
 			.then(response => {
 				this.$spinner.style.display = 'none';
 				this.projects = response.data;
+				
 				if(response.data.length == 0){
 					this.$errorMsg.innerHTML = 'No projects found :('
 				}
 				
 			})
 			.catch(error => {
-				var errorMsg = error.response.data.message
 				this.$spinner.style.display = 'none';
-				this.$errorMsg.innerHTML = errorMsg
+				this.$errorMsg.innerHTML = "User does not exist"
 			});
 
 	},
